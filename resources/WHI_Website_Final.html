@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Waste Wise Humanitarian Initiative (WHI)</title>
+  <style>
+    :root {
+      --blue: #4A6FA5;
+      --blue-dark: #3A5F95;
+      --blue-deep: #2A4F85;
+      --sage: #7C9E7E;
+      --sage-dark: #5C7E5E;
+      --warm: #FAF8F4;
+      --warm-mid: #F4F1EC;
+      --warm-dark: #EDE9E2;
+      --text: #2C2C2C;
+      --grey: #6B7280;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, serif;
+      background: var(--warm);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 244, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--blue);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text { display: flex; flex-direction: column; }
+
+    .nav-logo-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+      font-family: Georgia, serif;
+    }
+
+    .nav-logo-motto {
+      font-size: 9px;
+      color: var(--sage);
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--grey);
+      transition: color 0.3s;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-donate {
+      background: var(--blue) !important;
+      color: white !important;
+      padding: 10px 24px !important;
+      border-radius: 4px;
+      font-weight: 700 !important;
+      transition: all 0.3s;
+    }
+
+    .nav-donate:hover {
+      background: var(--blue-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(74,111,165,0.3);
+    }
+
+    /* Shield SVG for nav */
+    .nav-shield { width: 44px; height: 52px; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue) 50%, #5A80B5 100%);
+      padding: 130px 5% 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -150px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,158,126,0.15) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(250,248,244,0.06) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,158,126,0.2);
+      color: #A8C8AA;
+      padding: 8px 18px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      border-left: 3px solid var(--sage);
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #A8C8AA;
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    .hero-buttons { display: flex; gap: 16px; }
+
+    .btn-primary {
+      background: var(--warm);
+      color: var(--blue);
+      padding: 16px 36px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      padding: 16px 36px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-outline:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shield-hero {
+      width: 320px;
+      height: 380px;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--warm-mid);
+      border-top: 3px solid var(--blue);
+      border-bottom: 3px solid var(--sage);
+      padding: 36px 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      border-right: 1px solid rgba(74,111,165,0.15);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--blue);
+      display: block;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--grey);
+      margin-top: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 100px 5%; }
+    .section-warm { background: var(--warm); }
+    .section-mid { background: var(--warm-mid); }
+    .section-blue { background: var(--blue); }
+    .section-dark-blue { background: var(--blue-deep); }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 16px;
+      border-left: 3px solid var(--sage);
+      padding-left: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .section-tag.blue {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .section-title {
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--blue);
+    }
+
+    .section-title.white { color: white; }
+
+    .section-sub {
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--grey);
+      max-width: 600px;
+      margin-bottom: 60px;
+    }
+
+    .section-sub.white { color: rgba(255,255,255,0.75); }
+
+    /* ── PILLARS ── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: var(--warm-mid);
+      border: 1px solid rgba(74,111,165,0.1);
+      padding: 40px 32px;
+      border-radius: 4px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--blue);
+    }
+
+    .pillar-card:nth-child(2) { border-top-color: var(--sage); }
+    .pillar-card:nth-child(3) { border-top-color: var(--blue-dark); }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(74,111,165,0.15);
+    }
+
+    .pillar-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+
+    .pillar-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .pillar-desc { font-size: 14px; line-height: 1.9; color: var(--grey); }
+
+    /* ── PROGRAMS ── */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .program-card {
+      background: var(--warm);
+      border: 1px solid rgba(74,111,165,0.12);
+      padding: 32px 24px;
+      border-radius: 4px;
+      transition: all 0.3s;
+      position: relative;
+      border-left: 4px solid var(--blue);
+    }
+
+    .program-card:nth-child(even) { border-left-color: var(--sage); }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(74,111,165,0.12);
+    }
+
+    .program-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+
+    .program-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .program-desc { font-size: 13px; line-height: 1.8; color: var(--grey); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-card {
+      border-left: 4px solid var(--sage);
+      padding: 28px 28px;
+      background: var(--warm);
+      margin-bottom: 20px;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    .about-card.blue { border-left-color: var(--blue); }
+
+    .about-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sage);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .about-card.blue h3 { color: var(--blue); }
+
+    .about-card p { font-size: 14px; line-height: 1.9; color: var(--grey); font-style: italic; }
+
+    /* Values */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .value-card {
+      background: var(--warm);
+      padding: 24px 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(74,111,165,0.1);
+      transition: all 0.3s;
+    }
+
+    .value-card:hover {
+      border-color: var(--sage);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .value-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+    .value-title { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 6px; font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+    .value-desc { font-size: 12px; color: var(--grey); line-height: 1.6; }
+
+    /* ── IMPACT ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .impact-card {
+      text-align: center;
+      padding: 32px 16px;
+      background: var(--warm);
+      border-radius: 4px;
+      border: 1px solid rgba(74,111,165,0.1);
+      border-top: 4px solid var(--blue);
+      transition: all 0.3s;
+    }
+
+    .impact-card:nth-child(even) { border-top-color: var(--sage); }
+
+    .impact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .impact-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+
+    .impact-num {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .impact-card:nth-child(even) .impact-num { color: var(--sage-dark); }
+
+    .impact-label { font-size: 11px; color: var(--grey); font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.5; }
+
+    /* ── GET INVOLVED ── */
+    .involved-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .involved-card {
+      background: var(--warm);
+      border-radius: 4px;
+      padding: 36px 24px;
+      text-align: center;
+      border: 1px solid rgba(74,111,165,0.1);
+      border-top: 4px solid var(--blue);
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .involved-card:nth-child(even) { border-top-color: var(--sage); }
+
+    .involved-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(74,111,165,0.12);
+    }
+
+    .involved-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .involved-title { font-size: 18px; font-weight: 700; color: var(--blue); margin-bottom: 10px; }
+    .involved-desc { font-size: 13px; line-height: 1.7; color: var(--grey); margin-bottom: 24px; }
+
+    .btn-sm {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-blue { background: var(--blue); color: white; }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-sage { background: var(--sage); color: white; }
+    .btn-sage:hover { background: var(--sage-dark); transform: translateY(-2px); }
+    .btn-warm { background: var(--warm-mid); color: var(--blue); border: 1.5px solid var(--blue); }
+    .btn-warm:hover { background: var(--blue); color: white; transform: translateY(-2px); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: white; transform: translateY(-2px); }
+
+    /* ── QUOTE SECTION ── */
+    .quote-section {
+      background: var(--blue);
+      padding: 80px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: '"';
+      position: absolute;
+      top: -60px; left: 30px;
+      font-size: 350px;
+      color: rgba(255,255,255,0.05);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 700;
+      color: white;
+      max-width: 780px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-author {
+      font-size: 12px;
+      color: #A8C8AA;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--warm-mid);
+      padding: 100px 5%;
+      text-align: center;
+      border-top: 3px solid var(--sage);
+      border-bottom: 3px solid var(--blue);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn-cta-primary {
+      background: var(--blue);
+      color: white;
+      padding: 18px 44px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 4px 16px rgba(74,111,165,0.3);
+    }
+
+    .btn-cta-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74,111,165,0.4);
+    }
+
+    .btn-cta-outline {
+      background: transparent;
+      color: var(--blue);
+      padding: 18px 44px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      border: 2px solid var(--blue);
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-cta-outline:hover {
+      background: var(--blue);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ── DONATE ── */
+    .donate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .donate-card {
+      background: var(--warm);
+      border-radius: 4px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid rgba(74,111,165,0.12);
+      border-top: 4px solid var(--blue);
+    }
+
+    .donate-card:hover, .donate-card.selected {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(74,111,165,0.15);
+    }
+
+    .donate-amount {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .donate-impact { font-size: 12px; color: var(--grey); line-height: 1.6; font-family: Arial, sans-serif; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(74,111,165,0.08);
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--warm-mid);
+      border: 1.5px solid rgba(74,111,165,0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-detail h4 { font-size: 11px; font-weight: 700; color: var(--sage); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; font-family: Arial, sans-serif; }
+    .contact-detail p { font-size: 15px; color: var(--text); }
+
+    .contact-form {
+      background: var(--warm-mid);
+      border-radius: 4px;
+      padding: 40px;
+      border: 1px solid rgba(74,111,165,0.1);
+      border-top: 4px solid var(--blue);
+    }
+
+    .contact-form h3 { font-size: 22px; font-weight: 700; color: var(--blue); margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; font-family: Arial, sans-serif; }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(74,111,165,0.2);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      color: var(--text);
+      background: var(--warm);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-submit:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(74,111,165,0.3); }
+
+    /* ── INNER HERO ── */
+    .inner-hero {
+      padding: 130px 5% 70px;
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue) 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 4px solid var(--sage);
+    }
+
+    .inner-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,158,126,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    .inner-hero h1 { font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; color: white; line-height: 1.1; margin-bottom: 16px; max-width: 700px; position: relative; z-index: 1; }
+    .inner-hero h1 span { color: #A8C8AA; }
+    .inner-hero p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 580px; line-height: 1.8; position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-deep);
+      color: white;
+      padding: 70px 5% 30px;
+      border-top: 4px solid var(--sage);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h3 { font-size: 17px; font-weight: 700; margin-bottom: 14px; color: white; }
+    .footer-brand p { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .footer-tagline { font-size: 12px; font-style: italic; color: #A8C8AA; }
+
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(124,158,126,0.3); font-family: Arial, sans-serif; }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { text-decoration: none; font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .footer-col ul li a:hover { color: white; }
+
+    .social-links { display: flex; gap: 10px; margin-top: 10px; }
+    .social-link { width: 36px; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; text-decoration: none; transition: all 0.3s; }
+    .social-link:hover { background: var(--sage); border-color: var(--sage); transform: translateY(-2px); }
+
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); font-family: Arial, sans-serif; }
+
+    /* Pages */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+    #home { display: block; }
+
+    /* Shield SVG helper */
+    .shield-sm { width: 44px; height: 52px; }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">
+    <!-- Shield logo small -->
+    <svg class="nav-shield" viewBox="0 0 90 108" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="navShield" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#5A80B5"/>
+          <stop offset="100%" style="stop-color:#4A6FA5"/>
+        </linearGradient>
+      </defs>
+      <path d="M45 2 L86 20 L86 62 Q86 88 45 106 Q4 88 4 62 L4 20 Z" fill="url(#navShield)"/>
+      <path d="M45 8 L80 24 L80 62 Q80 84 45 100 Q10 84 10 62 L10 24 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <path d="M45 22 Q60 32 60 54 Q60 76 45 86 Q30 76 30 54 Q30 32 45 22 Z" fill="#7C9E7E" opacity="0.25"/>
+      <line x1="45" y1="22" x2="45" y2="86" stroke="#7C9E7E" stroke-width="1.2" opacity="0.4"/>
+      <text x="45" y="66" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1.5" opacity="0.95">WHI</text>
+      <circle cx="45" cy="2" r="5" fill="#7C9E7E"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Waste Wise Humanitarian Initiative</span>
+      <span class="nav-logo-motto">Educating · Empowering · Transforming</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('about')">About</a></li>
+    <li><a href="#" onclick="showPage('programs')">Programs</a></li>
+    <li><a href="#" onclick="showPage('get-involved')">Get Involved</a></li>
+    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    <li><a href="#" class="nav-donate" onclick="showPage('donate')">Donate Now</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════ HOME ══════════════════════════ -->
+<div id="home" class="page-section active">
+
+  <section class="hero">
+    <div style="position:relative; z-index:1;">
+      <div class="hero-tag">🌍 Global Environmental NGO</div>
+      <h1>Together We Turn <em>Pollution to Possibility</em></h1>
+      <p class="hero-sub">At Waste Wise Humanitarian Initiative, we are on a mission to eliminate nylon and plastic waste pollution — through education, partnership and youth empowerment.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" onclick="showPage('get-involved')">Join the Movement</a>
+        <a href="#" class="btn-outline" onclick="showPage('about')">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Large Shield in hero -->
+    <div class="hero-visual">
+      <svg class="shield-hero" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heroShield" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:rgba(255,255,255,0.25)"/>
+            <stop offset="100%" style="stop-color:rgba(255,255,255,0.08)"/>
+          </linearGradient>
+          <linearGradient id="heroShield2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:rgba(255,255,255,0.12)"/>
+            <stop offset="100%" style="stop-color:rgba(255,255,255,0.03)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Outer glow ring -->
+        <path d="M100 5 L192 42 L192 138 Q192 196 100 235 Q8 196 8 138 L8 42 Z" fill="rgba(124,158,126,0.15)"/>
+
+        <!-- Shield body -->
+        <path d="M100 12 L185 47 L185 138 Q185 192 100 228 Q15 192 15 138 L15 47 Z" fill="url(#heroShield)"/>
+
+        <!-- Shield border -->
+        <path d="M100 12 L185 47 L185 138 Q185 192 100 228 Q15 192 15 138 L15 47 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+
+        <!-- Inner shield -->
+        <path d="M100 24 L172 56 L172 138 Q172 184 100 216 Q28 184 28 138 L28 56 Z" fill="url(#heroShield2)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+
+        <!-- Leaf shape -->
+        <path d="M100 55 Q135 78 135 118 Q135 158 100 180 Q65 158 65 118 Q65 78 100 55 Z" fill="#7C9E7E" opacity="0.3"/>
+
+        <!-- Leaf veins -->
+        <line x1="100" y1="55" x2="100" y2="180" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+        <line x1="100" y1="88" x2="124" y2="108" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <line x1="100" y1="108" x2="76" y2="128" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <line x1="100" y1="128" x2="122" y2="146" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+
+        <!-- WHI text -->
+        <text x="100" y="135" font-family="Georgia, serif" font-size="58" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="4" opacity="0.95">WHI</text>
+
+        <!-- Underline -->
+        <line x1="62" y1="145" x2="138" y2="145" stroke="#A8C8AA" stroke-width="2" opacity="0.7"/>
+
+        <!-- Globe at bottom -->
+        <circle cx="100" cy="196" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+        <ellipse cx="100" cy="196" rx="22" ry="8" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <line x1="78" y1="196" x2="122" y2="196" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <line x1="100" y1="174" x2="100" y2="218" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+
+        <!-- Sage dot on top -->
+        <circle cx="100" cy="12" r="10" fill="#7C9E7E"/>
+        <circle cx="100" cy="12" r="5" fill="white" opacity="0.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label">Communities to Reach</span></div>
+    <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">Schools to Partner</span></div>
+    <div class="stat-item"><span class="stat-num">200+</span><span class="stat-label">Youth to Train</span></div>
+    <div class="stat-item"><span class="stat-num">10K+</span><span class="stat-label">People to Impact</span></div>
+  </div>
+
+  <!-- PILLARS -->
+  <section class="section section-warm">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="section-tag">Our Approach</span>
+      <h2 class="section-title">How We Make a Difference</h2>
+      <p class="section-sub" style="margin:0 auto;">Three powerful pillars working together to eliminate nylon and plastic waste pollution globally.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card"><span class="pillar-icon">🎓</span><div class="pillar-title">Educate</div><p class="pillar-desc">We go into communities and schools to raise awareness on waste management and sanitation — because knowledge is the first step to change.</p></div>
+      <div class="pillar-card"><span class="pillar-icon">🤝</span><div class="pillar-title">Partner</div><p class="pillar-desc">We build bridges between communities, governments and organizations — because the biggest challenges require the most powerful collaborations.</p></div>
+      <div class="pillar-card"><span class="pillar-icon">💡</span><div class="pillar-title">Empower</div><p class="pillar-desc">We equip young people with skills to turn waste into wealth — creating jobs, generating income and cleaning the environment simultaneously.</p></div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <p class="quote-text">"The nylon and plastic waste crisis will not solve itself. But with the right education, the right partnerships and empowered youth — we can solve it together."</p>
+    <span class="quote-author">— Founder, Waste Wise Humanitarian Initiative</span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <span class="section-tag" style="display:block; text-align:center; border:none; padding:0; margin-bottom:16px;">Join the Movement</span>
+    <h2 class="section-title" style="text-align:center; margin-bottom:20px;">Ready to Be Part of the Change?</h2>
+    <p class="section-sub" style="text-align:center; margin:0 auto 48px;">Whether you donate, volunteer, partner or spread the word — there is a place for you in this movement.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-cta-primary" onclick="showPage('donate')">Donate Now</a>
+      <a href="#" class="btn-cta-outline" onclick="showPage('get-involved')">Get Involved</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════ ABOUT ══════════════════════════ -->
+<div id="about" class="page-section">
+  <div class="inner-hero">
+    <span class="section-tag" style="color:#A8C8AA; border-color:#A8C8AA; margin-bottom:20px;">Who We Are</span>
+    <h1>We Are WHI —<br><span>On a Mission</span></h1>
+    <p>Born in Enugu, Nigeria with a global vision — we exist to turn the tide on nylon and plastic waste pollution, one community at a time.</p>
+  </div>
+
+  <section class="section section-warm">
+    <div class="about-grid">
+      <div>
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title" style="font-size:clamp(26px,3vw,38px);">How It All Began</h2>
+        <p style="font-size:16px; line-height:1.9; color:var(--grey); margin-bottom:20px;">We looked around and saw a crisis hiding in plain sight — nylon bags in gutters, plastic bottles in rivers, waste choking communities that deserved better.</p>
+        <p style="font-size:16px; line-height:1.9; color:var(--grey); margin-bottom:20px;">We asked ourselves: <em style="color:var(--blue);">What if we stopped waiting for someone else to fix this?</em></p>
+        <p style="font-size:16px; line-height:1.9; color:var(--grey);">And so WHI was born — with one belief: <strong style="color:var(--blue);">Pollution is not the end of the story. It is the beginning of possibility.</strong></p>
+      </div>
+      <div>
+        <div class="about-card">
+          <h3>🌍 Our Vision</h3>
+          <p>"Building a sustainable, waste-free world that is clean and safe for all generations, in alignment with the global green initiative."</p>
+        </div>
+        <div class="about-card blue">
+          <h3>🎯 Our Mission</h3>
+          <p>"To partner with governments, organizations, schools and communities in waste management; to educate society on sanitation; and to empower youths through the waste-to-wealth initiative for a better tomorrow."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-mid">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="section-tag">Our Values</span>
+      <h2 class="section-title">What We Stand For</h2>
+    </div>
+    <div class="values-grid" style="max-width:900px; margin:0 auto;">
+      <div class="value-card"><span class="value-icon">❤️</span><div class="value-title">Integrity</div><div class="value-desc">We do what we say and say what we do — always.</div></div>
+      <div class="value-card"><span class="value-icon">🌍</span><div class="value-title">Community</div><div class="value-desc">Every decision we make puts people first.</div></div>
+      <div class="value-card"><span class="value-icon">💪</span><div class="value-title">Empowerment</div><div class="value-desc">We believe in the power of every individual to create change.</div></div>
+      <div class="value-card"><span class="value-icon">💡</span><div class="value-title">Innovation</div><div class="value-desc">We find creative, sustainable solutions to complex problems.</div></div>
+      <div class="value-card"><span class="value-icon">🤝</span><div class="value-title">Collaboration</div><div class="value-desc">We know that together, we go further.</div></div>
+      <div class="value-card"><span class="value-icon">🌱</span><div class="value-title">Sustainability</div><div class="value-desc">Everything we do is built to last — for this generation and the next.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════ PROGRAMS ══════════════════════════ -->
+<div id="programs" class="page-section">
+  <div class="inner-hero">
+    <span class="section-tag" style="color:#A8C8AA; border-color:#A8C8AA; margin-bottom:20px;">What We Do</span>
+    <h1>Programs That<br><span>Create Real Change</span></h1>
+    <p>Six programs designed to create lasting environmental change — meeting communities where they are and young people where they dream.</p>
+  </div>
+
+  <section class="section section-warm">
+    <div class="programs-grid">
+      <div class="program-card"><span class="program-icon">📢</span><div class="program-title">Community Education & Awareness</div><p class="program-desc">We take waste management education directly into communities through workshops, seminars and outreach. When communities understand the problem, they become the solution.</p></div>
+      <div class="program-card"><span class="program-icon">🏫</span><div class="program-title">School Engagement Program</div><p class="program-desc">We bring environmental education into classrooms — making it interactive and inspiring for students of all ages. Today's students are tomorrow's environmental champions.</p></div>
+      <div class="program-card"><span class="program-icon">♻️</span><div class="program-title">Waste-to-Wealth Initiative</div><p class="program-desc">We train young people to convert nylon and plastic waste into sellable products — turning environmental pollution into economic empowerment and real jobs.</p></div>
+      <div class="program-card"><span class="program-icon">🧹</span><div class="program-title">Clean Community Campaign</div><p class="program-desc">Our hands-on clean-up exercises physically remove nylon and plastic waste from communities and waterways — inspiring pride and building unity.</p></div>
+      <div class="program-card"><span class="program-icon">🏛️</span><div class="program-title">Government & Institutional Partnership</div><p class="program-desc">We engage governments and institutions to advocate for stronger waste management policies and collaborate on community-level environmental projects.</p></div>
+      <div class="program-card"><span class="program-icon">🌿</span><div class="program-title">Green Ambassador Program</div><p class="program-desc">We train passionate young people as environmental advocates in their communities — giving them the platform, tools and confidence to lead and inspire peers.</p></div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <span class="section-tag" style="display:block; text-align:center; border:none; padding:0; margin-bottom:16px;">Partner With Us</span>
+    <h2 class="section-title" style="text-align:center; margin-bottom:20px;">Want to Be Part of Our Programs?</h2>
+    <p class="section-sub" style="text-align:center; margin:0 auto 48px;">Whether you are a school, government, organization or individual — we want to hear from you.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-cta-primary" onclick="showPage('contact')">Contact Us Now</a>
+      <a href="#" class="btn-cta-outline" onclick="showPage('get-involved')">Get Involved</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ GET INVOLVED ══════════════════════════ -->
+<div id="get-involved" class="page-section">
+  <div class="inner-hero">
+    <span class="section-tag" style="color:#A8C8AA; border-color:#A8C8AA; margin-bottom:20px;">Take Action</span>
+    <h1>There Is a Place<br><span>For You Here</span></h1>
+    <p>You don't have to be an environmental expert to make a difference. You just have to care — and act.</p>
+  </div>
+
+  <section class="section section-warm">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="section-tag">How to Help</span>
+      <h2 class="section-title">Four Ways to Make an Impact</h2>
+    </div>
+    <div class="involved-grid">
+      <div class="involved-card"><span class="involved-icon">💰</span><div class="involved-title">Donate</div><p class="involved-desc">Your financial contribution goes directly into educating communities, empowering youth and cleaning environments. Every contribution counts.</p><a href="#" class="btn-sm btn-blue" onclick="showPage('donate')">Donate Now</a></div>
+      <div class="involved-card"><span class="involved-icon">🤝</span><div class="involved-title">Partner</div><p class="involved-desc">Are you a government agency, corporate organization or foundation? Let's build something powerful together for maximum impact.</p><a href="#" class="btn-sm btn-sage" onclick="showPage('contact')">Become a Partner</a></div>
+      <div class="involved-card"><span class="involved-icon">🙋</span><div class="involved-title">Volunteer</div><p class="involved-desc">Do you have skills, time or passion to give? Join our growing team of volunteers and help us deliver programs that change lives.</p><a href="#" class="btn-sm btn-blue" onclick="showPage('contact')">Volunteer With Us</a></div>
+      <div class="involved-card"><span class="involved-icon">📢</span><div class="involved-title">Spread the Word</div><p class="involved-desc">Follow us on social media. Share our content. Tell your friends. The most powerful thing you can do is amplify the message.</p><a href="#" class="btn-sm btn-outline-blue">Follow Us</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════ DONATE ══════════════════════════ -->
+<div id="donate" class="page-section">
+  <div class="inner-hero">
+    <span class="section-tag" style="color:#A8C8AA; border-color:#A8C8AA; margin-bottom:20px;">Give Today</span>
+    <h1>Your Gift Changes<br><span>Lives and a Planet</span></h1>
+    <p>Every contribution to WHI goes directly into the hands and hearts of communities that need it most. You give. We act. Lives change.</p>
+  </div>
+
+  <section class="section section-warm">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="section-tag">Your Impact</span>
+      <h2 class="section-title">What Your Donation Does</h2>
+    </div>
+    <div class="donate-grid">
+      <div class="donate-card"><span class="donate-amount">$10</span><p class="donate-impact">Provides sanitation education materials for one family</p></div>
+      <div class="donate-card"><span class="donate-amount">$50</span><p class="donate-impact">Sponsors one youth for our waste-to-wealth training</p></div>
+      <div class="donate-card selected"><span class="donate-amount">$100</span><p class="donate-impact">Funds a community workshop for 20 people</p></div>
+      <div class="donate-card"><span class="donate-amount">$500</span><p class="donate-impact">Supports a full school engagement program</p></div>
+    </div>
+    <div style="max-width:500px; margin:0 auto; text-align:center;">
+      <p style="font-size:16px; line-height:1.9; color:var(--grey); margin-bottom:40px;">No amount is too small. When you give to WHI, you are investing in cleaner communities, empowered youth and a sustainable future for all generations.</p>
+      <a href="#" class="btn-cta-primary" style="display:inline-block; font-size:15px; padding:18px 48px;">Donate Now — Every Contribution Counts</a>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════ CONTACT ══════════════════════════ -->
+<div id="contact" class="page-section">
+  <div class="inner-hero">
+    <span class="section-tag" style="color:#A8C8AA; border-color:#A8C8AA; margin-bottom:20px;">Reach Out</span>
+    <h1>Let's Talk —<br><span>We're Ready</span></h1>
+    <p>Whether you have a question, a partnership proposal, a media inquiry or simply want to say hello — our team is ready.</p>
+  </div>
+
+  <section class="section section-warm">
+    <div class="contact-grid">
+      <div>
+        <span class="section-tag">Contact Details</span>
+        <h2 class="section-title" style="font-size:clamp(26px,3vw,38px); margin-bottom:40px;">Get In Touch</h2>
+        <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-detail"><h4>Address</h4><p>Enugu, Nigeria | Global Operations</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-detail"><h4>Email</h4><p>info@whi.org</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-detail"><h4>Phone</h4><p>[Insert Number]</p></div></div>
+        <div class="contact-item" style="border:none;"><div class="contact-icon">🌐</div><div class="contact-detail"><h4>Website</h4><p>www.whi.org</p></div></div>
+        <h4 style="font-size:11px; font-weight:700; color:var(--sage); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; font-family:Arial,sans-serif;">Follow Us</h4>
+        <div class="social-links">
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">📸</a>
+          <a href="#" class="social-link">🐦</a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+234..."/></div>
+          <div class="form-group"><label>Organization</label><input type="text" placeholder="Optional"/></div>
+        </div>
+        <div class="form-group"><label>Subject</label><input type="text" placeholder="How can we help?"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us more..."></textarea></div>
+        <button class="btn-submit">Send Message 🌿</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <!-- Small shield in footer -->
+      <svg width="36" height="44" viewBox="0 0 90 108" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:12px;">
+        <path d="M45 2 L86 20 L86 62 Q86 88 45 106 Q4 88 4 62 L4 20 Z" fill="rgba(255,255,255,0.15)"/>
+        <path d="M45 2 L86 20 L86 62 Q86 88 45 106 Q4 88 4 62 L4 20 Z" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <text x="45" y="66" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1" opacity="0.9">WHI</text>
+        <circle cx="45" cy="2" r="5" fill="#7C9E7E"/>
+      </svg>
+      <h3>Waste Wise Humanitarian Initiative</h3>
+      <p>Building a sustainable, waste-free world that is clean and safe for all generations. Educating communities, empowering youth and transforming environments globally.</p>
+      <span class="footer-tagline">"Together We Clean, Together We Grow"</span>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+        <li><a href="#" onclick="showPage('programs')">Programs</a></li>
+        <li><a href="#" onclick="showPage('get-involved')">Get Involved</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Our Programs</h4>
+      <ul>
+        <li><a href="#">Community Education</a></li>
+        <li><a href="#">School Engagement</a></li>
+        <li><a href="#">Waste to Wealth</a></li>
+        <li><a href="#">Clean Community</a></li>
+        <li><a href="#">Green Ambassador</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">info@whi.org</a></li>
+        <li><a href="#">www.whi.org</a></li>
+        <li><a href="#">Enugu, Nigeria</a></li>
+      </ul>
+      <div class="social-links" style="margin-top:16px;">
+        <a href="#" class="social-link">💼</a>
+        <a href="#" class="social-link">📘</a>
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">🐦</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Waste Wise Humanitarian Initiative (WHI). All rights reserved. | Enugu, Nigeria | Global Operations</p>
+    <p style="font-size:11px; color:rgba(255,255,255,0.25);">Made with ❤️ in Nigeria 🇳🇬</p>
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.querySelectorAll('.donate-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.donate-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    });
+  });
+</script>
+
+</body>
+</html>
