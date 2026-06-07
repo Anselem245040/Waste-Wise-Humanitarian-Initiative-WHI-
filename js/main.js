@@ -1,49 +1,84 @@
 (function () {
   'use strict';
 
-  const pages = document.querySelectorAll('.page-section');
-  const navLinks = document.querySelectorAll('.nav-links a[data-page]');
+  const sections = document.querySelectorAll('.page-section');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-links');
-
-  function showPage(id) {
-    pages.forEach(function (section) {
-      section.classList.remove('active');
-    });
-
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active');
-    }
-
-    navLinks.forEach(function (link) {
-      link.classList.toggle('active', link.dataset.page === id);
-    });
-
-    closeMobileNav();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  const navHeight = 74;
 
   function closeMobileNav() {
     if (navMenu) navMenu.classList.remove('open');
     if (navToggle) navToggle.classList.remove('open');
   }
 
-  window.showPage = showPage;
+  function updateActiveNav(id) {
+    navLinks.forEach(function (link) {
+      const linkId = link.getAttribute('href').slice(1);
+      link.classList.toggle('active', linkId === id);
+    });
+  }
 
-  navLinks.forEach(function (link) {
+  function scrollToSection(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateActiveNav(id);
+    closeMobileNav();
+    history.pushState(null, '', '#' + id);
+  }
+
+  window.scrollToSection = scrollToSection;
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    const id = href.slice(1);
+    if (!document.getElementById(id)) return;
+
     link.addEventListener('click', function (e) {
       e.preventDefault();
-      showPage(link.dataset.page);
+      scrollToSection(id);
     });
   });
 
-  document.querySelectorAll('[data-page]').forEach(function (el) {
-    if (el.closest('.nav-links')) return;
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      showPage(el.dataset.page);
+  function getCurrentSection() {
+    let current = 'home';
+
+    sections.forEach(function (section) {
+      if (window.scrollY >= section.offsetTop - navHeight - 20) {
+        current = section.id;
+      }
     });
+
+    return current;
+  }
+
+  let scrollTicking = false;
+
+  window.addEventListener('scroll', function () {
+    if (scrollTicking) return;
+    scrollTicking = true;
+
+    requestAnimationFrame(function () {
+      updateActiveNav(getCurrentSection());
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  window.addEventListener('load', function () {
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      if (document.getElementById(id)) {
+        setTimeout(function () {
+          scrollToSection(id);
+        }, 100);
+      }
+    } else {
+      updateActiveNav('home');
+    }
   });
 
   if (navToggle) {
@@ -111,12 +146,39 @@
       });
 
       if (valid) {
+        const submitBtn = contactForm.querySelector('.btn-submit');
         const success = contactForm.querySelector('.form-success');
-        if (success) success.classList.add('show');
-        contactForm.reset();
-        setTimeout(function () {
-          if (success) success.classList.remove('show');
-        }, 5000);
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+        }
+
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (response) {
+            if (response.ok) {
+              if (success) success.classList.add('show');
+              contactForm.reset();
+              setTimeout(function () {
+                if (success) success.classList.remove('show');
+              }, 5000);
+            } else {
+              alert('Something went wrong. Please try again or email us at info@whi.org.');
+            }
+          })
+          .catch(function () {
+            alert('Could not send your message. Please email us at info@whi.org.');
+          })
+          .finally(function () {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Message';
+            }
+          });
       }
     });
   }
